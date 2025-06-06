@@ -1,0 +1,23 @@
+# Flutter
+**/build/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.flx
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/engine/
+**/ios/Flutter/plugins/
+**/macos/Flutter/ephemeral/
+**/web/ephemeral/
+**/.dart_tool/
+**/.packages
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.idea/
+**/android/.gradle
+**/android/.idea
+**/android/local.properties
+**/android/gradle.properties
+**/pubspec.lock
+.DS_Store

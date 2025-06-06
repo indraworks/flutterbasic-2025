@@ -1,0 +1,52 @@
+import 'package:_01_mysocialmediaapp/models/user_model.dart';
+import 'package:_01_mysocialmediaapp/models/post_model.dart';
+
+//Posts  instance object post-post  dari Post class
+final _post0 = Post(
+  imageUrl: 'assets/images/post0.jpg',
+  author: User(name: 'orang0'),
+  title: 'Post 0',
+  location: 'Location 0',
+  likes: 100,
+  comments: 102,
+);
+final _post1 = Post(
+  imageUrl: 'assets/images/post1.jpg',
+  author: User(name: 'orang1'),
+  title: 'Post 1',
+  location: 'Location 1',
+  likes: 201,
+  comments: 61,
+);
+final _post2 = Post(
+  imageUrl: 'assets/images/post2.jpg',
+  author: User(name: 'orang2'),
+  title: 'Post 2',
+  location: 'Location 2',
+  likes: 301,
+  comments: 81,
+);
+final _post3 = Post(
+  imageUrl: 'assets/images/post3.jpg',
+  author: User(name: 'orang3'),
+  title: 'Post 3',
+  location: 'Location 3',
+  likes: 401,
+  comments: 41,
+);
+final _post4 = Post(
+  imageUrl: 'assets/images/post4.jpg',
+  author: User(name: 'orang4'),
+  title: 'Post 4',
+  location: 'Location 4',
+  likes: 104,
+  comments: 31,
+);
+final _post5 = Post(
+  imageUrl: 'assets/images/post5.jpg',
+  author: User(name: 'orang5'),
+  title: 'Post 5',
+  location: 'Location 5',
+  likes: 105,
+  comments: 21,
+);
