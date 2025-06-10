@@ -50,3 +50,26 @@ final _post5 = Post(
   likes: 105,
   comments: 21,
 );
+
+final posts = [_post0, _post1, _post2, _post3, _post4, _post5];
+final users = [
+  User(name: "user0", profileImageUrl: "assets/images/user0.jpg"),
+  User(name: "user1", profileImageUrl: "assets/images/user1.jpg"),
+  User(name: "user2", profileImageUrl: "assets/images/user2.jpg"),
+  User(name: "user3", profileImageUrl: "assets/images/user3.jpg"),
+  User(name: "user4", profileImageUrl: "assets/images/user4.jpg"),
+  User(name: "user5", profileImageUrl: "assets/images/user5.jpg"),
+];
+final _yourPosts = [_post1, _post3, _post5];
+final _yourFavorites = [_post0, _post4];
+
+//current users
+final User currentUser = User(
+  name: "Santoso",
+  profileImageUrl: 'assets/images/user.jpg',
+  backgroundImageUrl: 'assets/images/user_background.jpg',
+  following: 39,
+  followers: 89,
+  posts: _yourPosts,
+  favorites: _yourFavorites,
+);
