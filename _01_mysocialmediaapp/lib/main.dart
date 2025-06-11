@@ -1,3 +1,4 @@
+import 'package:_01_mysocialmediaapp/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:_01_mysocialmediaapp/screens/login_screen.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.blue),
       home: LoginScreen(),
+      routes: {"/main": (context) => MainScreen()},
     );
   }
 }

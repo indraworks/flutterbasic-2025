@@ -82,11 +82,8 @@ class _LoginScreenState extends State<LoginScreen> {
               //container kit awrapper dgn new Widget gesture detector utk supaya bisa ontap
               //mirip onCLikc di react
               GestureDetector(
-                onTap:
-                    () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => HomeScreen()),
-                    ),
+                onTap: () => Navigator.pushReplacementNamed(context, '/main'),
+
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 60.0),
                   alignment: Alignment.center,

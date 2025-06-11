@@ -1,5 +1,5 @@
 import 'package:_01_mysocialmediaapp/data/data.dart';
-import 'package:_01_mysocialmediaapp/widgets/custom_drawer.dart';
+import 'package:_01_mysocialmediaapp/screens/main_screen.dart';
 import 'package:_01_mysocialmediaapp/widgets/following_users.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,6 +45,12 @@ class _HomeScreenState extends State<HomeScreen>
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed:
+              () =>
+                  MainScreen.of(context)?.openDrawer(), // Access parent drawer
+        ),
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         title: Text(
@@ -68,7 +74,6 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       //baurt drawer diatas body
-      drawer: CustomDrawer(),
 
       //buat list view bisa scrollup-down dibawah tabbar
       body: ListView(

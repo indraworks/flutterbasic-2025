@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:_01_mysocialmediaapp/data/data.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+class MapScreen extends StatefulWidget {
+  const MapScreen({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<MapScreen> createState() => _MapScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(title: Text("Hello Map")));
