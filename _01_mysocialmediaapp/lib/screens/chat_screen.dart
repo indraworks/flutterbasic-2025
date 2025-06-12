@@ -1,3 +1,4 @@
+import 'package:_01_mysocialmediaapp/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:_01_mysocialmediaapp/data/data.dart';
 
@@ -35,6 +36,10 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () => MainScreen.of(context)?.openDrawer(),
+        ),
         title: Row(
           children: [
             CircleAvatar(backgroundImage: AssetImage(users[1].profileImageUrl)),

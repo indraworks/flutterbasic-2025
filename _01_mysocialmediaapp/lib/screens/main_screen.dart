@@ -12,21 +12,17 @@ import 'package:flutter/material.dart';
 //utk atur perpindahan navigate buat mainscreen dan buat state
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+  //ahrus taruh static disni utk scapoldnya baru bisa kerja!
+  static ScaffoldState? of(BuildContext context) {
+    final state = context.findAncestorStateOfType<_MainScreenState>();
+    return state?._scaffoldKey.currentState;
+  }
 
   @override
   State<MainScreen> createState() => _MainScreenState();
-
-  static of(BuildContext context) {}
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static ScaffoldState? of(BuildContext context) {
-    return context
-        .findRootAncestorStateOfType<_MainScreenState>()
-        ?._scaffoldKey
-        .currentState;
-  }
-
   //Buat GlobalKey di mainnya
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
@@ -36,18 +32,33 @@ class _MainScreenState extends State<MainScreen> {
     ChatScreen(),
     ProfileScreen(user: currentUser),
     MapScreen(),
-    LoginScreen(),
+    //LoginScreen(),
+    // Note: index 4 (Settings) – currently placeholder
+    Center(child: Text('Settings')),
   ];
+
+  //buat function
+  void _onDrawerItemSelected(int index) {
+    Navigator.pop(context); //close drawernya baru ke navivate screen lain
+    if (index == 5) {
+      //Logout logic navigate ke Login screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => LoginScreen()),
+      );
+    } else {
+      setState(() => _currentIndex = index);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       drawer: CustomDrawer(
-        onItemSelected: (index) {
-          setState(() => _currentIndex = index);
-          _scaffoldKey.currentState?.openDrawer();
-        },
+        //onItemSelected adalan field local di ClustomDrawer
+        //terima arg param _onDrawerItemSelected
+        onItemSelected: _onDrawerItemSelected,
       ),
       body: _screens[_currentIndex],
     );
@@ -59,6 +70,8 @@ class CustomDrawer extends StatelessWidget {
 
   const CustomDrawer({super.key, required this.onItemSelected});
   //kalau buat widget wajib ada context dgn type BuildContext
+  //m,buat Widget berupa Optionnya lengkap dgn icon dan tap utk navigae ke screen lain!
+  //widget ini dipasang di Drawer based on List<widget> diatas! udah kita declare!
   Widget _buildDrawerOption(
     BuildContext context,
     icon,
@@ -128,8 +141,8 @@ class CustomDrawer extends StatelessWidget {
           ),
           _buildDrawerOption(context, Icons.dashboard, "Home", 0),
           _buildDrawerOption(context, Icons.chat, 'Chat', 1),
-          _buildDrawerOption(context, Icons.map_rounded, 'Map', 2),
-          _buildDrawerOption(context, Icons.account_circle, "Your Profile", 3),
+          _buildDrawerOption(context, Icons.map_rounded, 'Map', 3),
+          _buildDrawerOption(context, Icons.account_circle, "Your Profile", 2),
           _buildDrawerOption(context, Icons.settings, 'Settings', 4),
           Expanded(
             child: Align(
