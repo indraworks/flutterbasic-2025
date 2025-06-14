@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//SUMBER BACAAN :https://medium.com/flutter-community/flutter-custom-clipper-28c6d380fdd6
 class CurveClipper extends CustomClipper<Path> {
   //tambahkan misisng ovveridenya
 
@@ -13,11 +14,13 @@ class CurveClipper extends CustomClipper<Path> {
       4 * size.height / 5,
     ); //titk terendah sblak kiri dari titik-max-busur
     //titik-max-busur ,line width dibagi 4
+
     Offset curvePoint1 = Offset(
       size.width / 4,
       size.height,
     ); //max-titik-busur(kebawah)
-    //titik tengah body
+
+    //titik tengah body ( tinggi sama  yaitu   4 * size.height / 5 )
     Offset centerPoint = Offset(
       size.width / 2,
       4 * size.height / 5,
@@ -29,6 +32,7 @@ class CurveClipper extends CustomClipper<Path> {
       centerPoint.dy,
     );
     //mmbuat kurve sisa dari tengah ke kanan
+    //ini nilai y mejorok ke dalam ( -minus paling tinggi =3 * size.height / 5)
     Offset curvePoint2 = Offset(3 * size.width / 4, 3 * size.height / 5);
     Offset endPoint = Offset(size.width, 4 * size.height / 5);
     path.quadraticBezierTo(

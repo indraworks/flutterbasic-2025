@@ -1,8 +1,10 @@
+import 'package:_02_mysocial_ui/data/data.dart';
+
 import 'package:flutter/material.dart';
 import 'package:_02_mysocial_ui/screens/home_screen.dart';
 import 'package:_02_mysocial_ui/screens/login_screen.dart';
-import 'package:_02_mysocial_ui/screens/map_screen.dart';
-import 'package:_02_mysocial_ui/screens/register_screen.dart';
+import 'package:_02_mysocial_ui/screens/profile_screen.dart';
+import 'package:_02_mysocial_ui/screens/chat_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,10 +22,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/home',
       routes: {
         '/login': (context) => LoginScreen(),
-        '/register': (context) => RegisterScreen(),
+        '/chat': (context) => ChatScreen(),
         '/home': (context) => HomeScreen(),
         // '/chat': (context) => ChatScreen(),
-        '/map': (context) => MapScreen(),
+        '/profile': (context) => ProfileScreen(user: currentUser),
       },
     );
   }
