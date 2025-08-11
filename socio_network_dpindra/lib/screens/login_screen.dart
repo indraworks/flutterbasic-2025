@@ -3,7 +3,9 @@ import 'package:socio_network_dpindra/widgets/app_drawer.dart';
 import 'package:socio_network_dpindra/widgets/curve_dipper.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  //ktembahan func  toggleTheme sbgai param lwat constructor
+  final Function toggleTheme;
+  const LoginScreen({super.key, required this.toggleTheme});
 
   @override
   Widget build(BuildContext context) {

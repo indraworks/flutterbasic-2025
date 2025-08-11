@@ -1,0 +1,89 @@
+import 'package:_02_mysocial_ui/data/data.dart';
+import 'package:_02_mysocial_ui/widgets/app_drawer.dart';
+import 'package:_02_mysocial_ui/widgets/following_users.dart';
+import 'package:_02_mysocial_ui/widgets/post_carousel.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:_02_mysocial_ui/utils/responsive_utils.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+//pakai mixin atau extendnya dgn SingleTickerProviderStateMixin karena memakai tab dan page !
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  //mmbuat 2 buah tab
+  late TabController _tabController;
+  late PageController _pageController;
+
+  //initial state utk tab dan page
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _pageController = PageController(initialPage: 0, viewportFraction: 0.8);
+  }
+
+  //dispose utk clear remove dari screen ktika away berpindah
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+   //Check devicetyoe ( mobile,tablet,desktop) and apply appropriate UI changes
+   bool isMobile = ResponsiveUtils.isMobile(context);
+   bool isTablet = ResponsiveUtils.isTablet(context);
+   bool isDesktop = ResponsiveUtils.isDesktop(context);
+
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarBrightness:isMobile?Brightness.light:Brightness.dark );
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "FRENSTUDY",
+          style: TextStyle(
+            fontSize: isMobile?18:(isTablet?24:30),
+            color: Theme.of(context).primaryColor,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 8.0,
+          ),
+        ),
+        leading: Builder(
+          builder:
+              (context) => IconButton(
+                onPressed: () => Scaffold.of(context).openDrawer(),
+                icon: Icon(Icons.menu),
+              ),
+        ),
+        backgroundColor: Colors.white,
+        bottom: TabBar(
+          controller: _tabController,
+          indicatorWeight: 5.0, //tebal garis tab
+          labelColor: Theme.of(context).primaryColor,
+          labelStyle: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0),
+          unselectedLabelStyle: TextStyle(fontSize: 18),
+
+          tabs: [Tab(text: "Trending"), Tab(text: "Latest")],
+        ),
+      ),
+      drawer: AppDrawer(),
+      body: ListView(
+        children: [
+          FollowingUsers(),
+          PostCarousel(
+            pageController: _pageController,
+            title: 'Posts',
+            posts: posts,
+          ),
+        ],
+      ),
+    );
+  }
+}

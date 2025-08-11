@@ -13,14 +13,31 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Flutter Layout Demo",
       theme: ThemeData(primarySwatch: Colors.blue),
-
-      home: const HomeScreen(),
+      //comit 2 ini ubah mnggunakan class NavigationWrawper
+      home: const NavigationWrapper(),
       routes: {
         '/page1': (context) => PageScreen1(),
         '/page2': (context) => PageScreen2(),
         '/page3': (context) => PageScreen3(),
       },
     );
+  }
+}
+
+class NavigationWrapper extends StatefulWidget {
+  const NavigationWrapper({super.key});
+
+  @override
+  State<NavigationWrapper> createState() => _NavigationWrapperState();
+}
+
+class _NavigationWrapperState extends State<NavigationWrapper> {
+  int _currentIndex = 0;
+  //declare
+  final List<Widget> _pages = [];
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
@@ -166,5 +183,18 @@ Container -->Basic widget ygmana contain 1 buah chilkd dgn option padding,margin
 4.Expanded 
 
 
+
+*/
+
+/*
+commit pertama code diatas seblum diubah 
+
+*/
+
+/*
+commit kedua : navigation.pushedName itu gak pakai adapop otomatis di depan layar ada tanda panah balik ke hone
+nah kali ini kita refactor utk tabnya yang mana tadi masih pakai navigatiom.pushedNamed 
+jadi kita gak pakai stack push tapi kita gunakan index based navigation ! 
+bair lebih aman!
 
 */
