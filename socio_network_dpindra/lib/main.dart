@@ -55,6 +55,13 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: _isDarkMode ? AppTheme.darkTheme() : AppTheme.lightTheme(),
       home: LoginScreen(toggleTheme: toggleTheme),
+      routes: {
+        "/login": (context) => LoginScreen(toggleTheme: toggleTheme),
+        "/home": (context) => HomeScreen(toggleTheme: toggleTheme),
+        "/chat": (context) => ChatScreen(toggleTheme: toggleTheme),
+        "/profie": (context) =>
+            ProfileScreen(user: currentUser, toggleTheme: toggleTheme),
+      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//clipper tak perlu responseive
 //SUMBER BACAAN :https://medium.com/flutter-community/flutter-custom-clipper-28c6d380fdd6
 class CurveClipper extends CustomClipper<Path> {
   //tambahkan misisng ovveridenya

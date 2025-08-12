@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+//new utils dan theme
+import 'package:_02_mysocial_ui/theme/app_theme.dart';
+import 'package:_02_mysocial_ui/utils/responsive.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -10,27 +13,38 @@ class AppDrawer extends StatelessWidget {
     required String title,
     required String routeName,
   }) {
+    //theme
+    final text = Theme.of(context).textTheme;
     return ListTile(
-      leading: Icon(icon),
-      title: Text(title),
+      leading: Icon(
+        icon,
+        color: Theme.of(context).colorScheme.primary,
+      ), //thHEME
+      title: Text(title, style: text.bodyLarge), //theme
       onTap: () => Navigator.pushReplacementNamed(context, routeName),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    //variable for theme
+    final scheme = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
+
     return Drawer(
       child: ListView(
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(AppTheme.sp12), //Theme
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
+            decoration: BoxDecoration(color: scheme.primary), //theme
             child: Text(
               "Main Menu",
-              style: TextStyle(color: Colors.white, fontSize: 23),
+              style: text.titleMedium?.copyWith(
+                color: scheme.onPrimary,
+              ), //theme
             ),
           ),
-          SizedBox(height: 50),
+          SizedBox(height: Responsive.isMobile(context) ? 24 : 48), //RESP
           buildListTile(
             context: context,
             icon: Icons.home,

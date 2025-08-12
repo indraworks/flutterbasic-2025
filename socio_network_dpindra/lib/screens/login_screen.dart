@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:socio_network_dpindra/utils/responsive.dart';
 import 'package:socio_network_dpindra/widgets/app_drawer.dart';
 import 'package:socio_network_dpindra/widgets/curve_dipper.dart';
 
@@ -13,7 +14,7 @@ class LoginScreen extends StatelessWidget {
 
     return Scaffold(
       key: scaffoldKey,
-      drawer: AppDrawer(),
+      drawer: AppDrawer(toggleTheme: toggleTheme),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -32,28 +33,46 @@ class LoginScreen extends StatelessWidget {
                         height: MediaQuery.of(context).size.height / 2.5,
                         width: double.infinity,
                         fit: BoxFit.cover,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.black.withValues(
+                                alpha: 0.6,
+                              ) //withOpactiy descrepancies!
+                            : null,
+                        colorBlendMode:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? BlendMode.darken
+                            : BlendMode.dst,
                       ),
                     ),
-                    // Rest of the form
+                    // Rest of the form////////////////
+                    //App title using theme  text style
                     Text(
                       "FRENDSTUDY",
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.displaySmall!.copyWith(
                         color: Theme.of(context).primaryColor,
-                        fontSize: 32.5,
-                        fontWeight: FontWeight.bold,
                         letterSpacing: 7.0,
                       ),
                     ),
-                    const SizedBox(height: 10.0),
+
+                    SizedBox(height: Responsive.responsivePadding(context)),
+                    //form fields dengan responsive padding
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                        vertical: 10.0,
+                      //EdgeInset jangan pakai const!
+                      padding: EdgeInsets.symmetric(
+                        //Responsive
+                        horizontal: Responsive.responsiveImageSize(context) * 2,
+                        vertical: Responsive.responsivePadding(context),
                       ),
                       child: TextField(
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 15.0),
-                          fillColor: Colors.white,
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical:
+                                Responsive.responsiveImageSize(context) * 1.5,
+                            horizontal: Responsive.responsivePadding(context),
+                          ),
+                          fillColor: Theme.of(
+                            context,
+                          ).cardColor, //theme folow global
                           filled: true,
                           hintText: "Username",
                           prefixIcon: Icon(Icons.account_box, size: 30.0),
