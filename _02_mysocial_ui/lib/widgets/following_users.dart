@@ -2,16 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:_02_mysocial_ui/models/user_model.dart';
 import 'package:_02_mysocial_ui/data/data.dart';
 
+//new resp & theme
+import 'package:_02_mysocial_ui/theme/app_theme.dart';
+import 'package:_02_mysocial_ui/utils/responsive.dart';
+
 class FollowingUsers extends StatelessWidget {
   const FollowingUsers({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //variable theme
+    final text = Theme.of(context).textTheme;
+    final primary = Theme.of(context).colorScheme.primary;
+    //RESP
+    final double avatarSize = Responsive.isMobile(context) ? 56 : 64;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+          // old padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+          //new RESP+THEME
+          padding: EdgeInsets.fromLTRB(
+            Responsive.isDesktop(context) ? 0 : AppTheme.sp16,
+            AppTheme.sp20,
+            AppTheme.sp16,
+            AppTheme.sp12,
+          ),
           child: Text(
             'Following',
             style: TextStyle(
@@ -29,6 +46,7 @@ class FollowingUsers extends StatelessWidget {
             itemCount: users.length,
             itemBuilder: (BuildContext context, int index) {
               User user = users[index];
+
               return GestureDetector(
                 onTap: () {},
                 child: Container(

@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:_02_mysocial_ui/theme/app_theme.dart';
+import 'package:_02_mysocial_ui/utils/responsive.dart';
 import 'package:_02_mysocial_ui/widgets/app_drawer.dart';
 import 'package:_02_mysocial_ui/data/data.dart';
 import 'package:_02_mysocial_ui/widgets/post_carousel.dart';
@@ -35,6 +37,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     //pakai globalKey
+    final text = Theme.of(context).textTheme; //THEMe
+    final double avatar = Responsive.isMobile(context) ? 110 : 140; //RESP
 
     return Scaffold(
       key: _scaffoldKey,
@@ -52,7 +56,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ClipPath(
                     clipper: ProfileClipper(),
                     child: Image(
-                      height: 300,
+                      //height: 300, old
+                      height: Responsive.isMobile(context) ? 260 : 320, //RESP
                       width: double.infinity,
                       image: AssetImage(widget.user.backgroundImageUrl),
                       fit: BoxFit.cover,
@@ -64,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     left: 10,
                     child: SafeArea(
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(AppTheme.sp8), //THeme
                         child: Align(
                           alignment: Alignment.topLeft,
                           child: IconButton(
@@ -80,8 +85,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
 
                   Positioned(
-                    top: (300 - 120),
-                    left: MediaQuery.of(context).size.width / 2 - 60,
+                    //top: (300 - 120),
+                    top: (Responsive.isMobile(context) ? 260 : 320) - (avatar),
+                    left: MediaQuery.of(context).size.width / 2 - (avatar / 2),
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -95,11 +101,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       //childnya container kita buat clipOval
                       child: ClipOval(
-                        child: Image(
-                          height: 120.0,
-                          width: 120.0,
-                          image: AssetImage(widget.user.profileImageUrl),
-                          fit: BoxFit.cover,
+                        // child: Image(
+                        //   height: 120.0,
+                        //   width: 120.0,
+                        //   image: AssetImage(widget.user.profileImageUrl),
+                        //   fit: BoxFit.cover,
+                        // ),
+                        child: Image.asset(
+                          widget.user.profileImageUrl,
+                          height: avatar,
+                          width: avatar,
+                          fit: BoxFit.cover, // RESP
                         ),
                       ),
                     ),
@@ -108,14 +120,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               //dibawah stack kasih pading
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(AppTheme.sp12), // theme Spacing
                 child: Text(
                   widget.user.name,
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.5,
-                  ),
+                  // style: TextStyle(
+                  //   fontSize: 25.0,
+                  //   fontWeight: FontWeight.bold,
+                  //   letterSpacing: 1.5,
+                  // ),
+                  style: text.titleMedium,
                 ),
               ),
               Row(
@@ -126,15 +139,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Text(
                         'Folowing',
-                        style: TextStyle(color: Colors.black45, fontSize: 22.0),
-                      ),
+                        // style: TextStyle(color: Colors.black45, fontSize: 22.0),
+                        style: text.bodyLarge?.copyWith(color: Colors.grey),
+                      ), // THEME
+
                       SizedBox(height: 2.0),
                       Text(
                         widget.user.following.toString(),
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        // style: TextStyle(
+                        //   fontSize: 20.0,
+                        //   fontWeight: FontWeight.w600,
+                        // ),
+                        style: text.titleSmall, //theme
                       ),
                     ],
                   ),
@@ -142,16 +158,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Text(
                         'Followers',
-                        style: TextStyle(color: Colors.black54, fontSize: 22.0),
+                        // style: TextStyle(color: Colors.black54, fontSize: 22.0),
+                        style: text.bodyLarge?.copyWith(color: Colors.grey),
                       ),
                       SizedBox(height: 2.0),
+                      // Text(
+                      //   widget.user.followers.toString(),
+                      //   style: TextStyle(
+                      //     fontSize: 20.0,
+                      //     fontWeight: FontWeight.w600,
+                      //   ),
+                      // ),
                       Text(
                         widget.user.followers.toString(),
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                        style: text.titleSmall,
+                      ), // THEME
                     ],
                   ),
                 ],
@@ -167,7 +188,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 title: 'Your Favorites',
                 posts: widget.user.favorites,
               ),
-              SizedBox(height: 40),
+              // SizedBox(height: 40),
+              SizedBox(height: AppTheme.sp24),
             ],
           ),
         ),

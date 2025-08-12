@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:_02_mysocial_ui/models/post_model.dart';
 
+//NEW RESP & THEME
+import 'package:_02_mysocial_ui/theme/app_theme.dart';
+import 'package:_02_mysocial_ui/utils/responsive.dart';
+
 class PostCarousel extends StatelessWidget {
   //field local
   final PageController pageController;
@@ -19,6 +23,148 @@ class PostCarousel extends StatelessWidget {
   //local func
   ////utk BuiltContext adalah class yg merrpresentasi kan siwidget ada dimana ,dicabang2 widget tree diseluruh aplikasi
   _buildPost(BuildContext context, int index) {
+    final scheme = Theme.of(context).colorScheme; // THEME
+    final text = Theme.of(context).textTheme; // THEME
+    final Post post = posts[index];
+
+    final double cardHeight = Responsive.isMobile(context) ? 360 : 420; // RESP
+    final double cardWidth = Responsive.isMobile(context) ? 280 : 320; // RESP
+
+    return AnimatedBuilder(
+      animation: pageController,
+      builder: (BuildContext context, Widget? child) {
+        double value = 1;
+        if (pageController.position.hasContentDimensions) {
+          value = pageController.page! - index;
+          value = (1 - (value.abs() * 0.25)).clamp(0.0, 1.0);
+        }
+        return Center(
+          child: SizedBox(
+            height: Curves.easeInOut.transform(value) * cardHeight, // RESP
+            child: child,
+          ),
+        );
+      },
+      child: Stack(
+        children: [
+          Container(
+            margin: const EdgeInsets.all(AppTheme.sp12), // THEME spacing
+            decoration: BoxDecoration(
+              borderRadius: AppTheme.radiusLg, // THEME radius
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(0, 2.0),
+                  blurRadius: 6.0,
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: AppTheme.radiusLg, // THEME radius
+              child: Image.asset(
+                post.imageUrl,
+                height: cardHeight, // RESP
+                width: cardWidth, // RESP
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned(
+            left: AppTheme.sp12,
+            right: AppTheme.sp12,
+            bottom: AppTheme.sp12, // THEME spacing
+            child: Container(
+              padding: const EdgeInsets.all(AppTheme.sp12), // THEME spacing
+              height: 110,
+              decoration: BoxDecoration(
+                color:
+                    Theme.of(context).brightness == Brightness.light
+                        ? Colors.white70
+                        : Colors.black54, // THEME adaptif
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
+                ), // THEME radius
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(post.title, style: text.bodyLarge), // THEME
+                  Text(post.location, style: text.bodyMedium), // THEME
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.favorite, color: Colors.red),
+                          const SizedBox(width: 6),
+                          Text(
+                            post.likes.toString(),
+                            style: text.bodyLarge,
+                          ), // THEME
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.comment, color: scheme.primary), // THEME
+                          const SizedBox(width: 6),
+                          Text(
+                            post.comments.toString(),
+                            style: text.bodyLarge,
+                          ), // THEME
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final text = Theme.of(context).textTheme; // THEME
+    final double carouselHeight =
+        Responsive.isMobile(context) ? 380 : 440; // RESP
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(
+            Responsive.isDesktop(context) ? 0 : AppTheme.sp16, // RESP + THEME
+            AppTheme.sp20,
+            AppTheme.sp16,
+            AppTheme.sp12,
+          ),
+          child: Text(
+            title,
+            style: text.titleMedium?.copyWith(letterSpacing: 1.5), // THEME
+          ),
+        ),
+        SizedBox(
+          height: carouselHeight, // RESP
+          child: PageView.builder(
+            controller: pageController,
+            itemCount: posts.length,
+            itemBuilder: (c, i) => _buildPost(c, i),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
+///////////////////OLD SCRIPP ////////////////////
+///
+/*
+ _buildPost(BuildContext context, int index) {
     Post post = posts[index];
     //stack isi banyak widget/object ex:image yg bertumpuk dalam layer
     //kita bungkus wraper dgn imageBuilder
@@ -162,4 +308,19 @@ class PostCarousel extends StatelessWidget {
       ],
     );
   }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/

@@ -18,7 +18,7 @@ class AppDrawer extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.primary, //theME
       ), //thHEME
       title: Text(title, style: text.bodyLarge), //theme
       onTap: () => Navigator.pushReplacementNamed(context, routeName),
@@ -28,8 +28,8 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //variable for theme
-    final scheme = Theme.of(context).colorScheme;
-    final text = Theme.of(context).textTheme;
+    final scheme = Theme.of(context).colorScheme; //thEME
+    final text = Theme.of(context).textTheme; //THEME
 
     return Drawer(
       child: ListView(
